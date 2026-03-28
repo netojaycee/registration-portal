@@ -80,7 +80,8 @@ export const RegistrationScalarFieldEnum = {
   email: 'email',
   phone: 'phone',
   isAccredited: 'isAccredited',
-  createdAt: 'createdAt'
+  createdAt: 'createdAt',
+  memberType: 'memberType'
 } as const
 
 export type RegistrationScalarFieldEnum = (typeof RegistrationScalarFieldEnum)[keyof typeof RegistrationScalarFieldEnum]

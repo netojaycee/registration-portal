@@ -601,7 +601,8 @@ export const RegistrationScalarFieldEnum = {
   email: 'email',
   phone: 'phone',
   isAccredited: 'isAccredited',
-  createdAt: 'createdAt'
+  createdAt: 'createdAt',
+  memberType: 'memberType'
 } as const
 
 export type RegistrationScalarFieldEnum = (typeof RegistrationScalarFieldEnum)[keyof typeof RegistrationScalarFieldEnum]
@@ -694,6 +695,20 @@ export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel
  * Reference to a field of type 'DateTime[]'
  */
 export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
+    
+
+
+/**
+ * Reference to a field of type 'MemberType'
+ */
+export type EnumMemberTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MemberType'>
+    
+
+
+/**
+ * Reference to a field of type 'MemberType[]'
+ */
+export type ListEnumMemberTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MemberType[]'>
     
 
 

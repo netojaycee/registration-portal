@@ -9,6 +9,14 @@
 * 🟢 You can import this file directly.
 */
 
+export const MemberType = {
+  member: 'member',
+  visitor: 'visitor'
+} as const
+
+export type MemberType = (typeof MemberType)[keyof typeof MemberType]
+
+
 export const Gender = {
   male: 'male',
   female: 'female'

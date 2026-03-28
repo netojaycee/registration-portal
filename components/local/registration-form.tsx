@@ -36,6 +36,7 @@ const schema = z
     lastName: z.string().min(1, "Last name is required"),
     branch: z.string().min(1, "Branch is required"),
     gender: z.enum(["male", "female"]),
+    memberType: z.enum(["member", "visitor"]),
     email: z.string().email().optional().or(z.literal("")),
     phone: z.string().optional().or(z.literal("")),
   })
@@ -57,6 +58,7 @@ export default function RegistrationForm() {
     watch,
   } = useForm<FormData>({
     resolver: zodResolver(schema),
+    defaultValues: { memberType: "member" },
   });
 
   async function onSubmit(data: FormData) {
@@ -116,6 +118,7 @@ export default function RegistrationForm() {
             <Separator className="my-0" />
             <FieldGroup>
               <div className="grid grid-cols-2 gap-2">
+                              
                 <Field>
                   <FieldLabel htmlFor="firstName">First Name</FieldLabel>
                   <Input
@@ -237,6 +240,31 @@ export default function RegistrationForm() {
                     }
                   />
                 </Field>
+
+                  <Field className="col-span-2">
+                                  <FieldLabel htmlFor="memberType">Member Type</FieldLabel>
+                                  <Select
+                                    value={watch("memberType")}
+                                    onValueChange={(val) => {
+                                      const event = { target: { name: "memberType", value: val } };
+                                      register("memberType").onChange(event);
+                                    }}
+                                  >
+                                    <SelectTrigger id="memberType" className="w-full">
+                                      <SelectValue placeholder="Select type" />
+                                    </SelectTrigger>
+                                    <SelectContent>
+                                      <SelectItem value="member">Member</SelectItem>
+                                      <SelectItem value="visitor">Visitor</SelectItem>
+                                    </SelectContent>
+                                  </Select>
+                                  <FieldError
+                                    className="text-xs"
+                                    errors={
+                                      errors.memberType ? [{ message: errors.memberType.message }] : []
+                                    }
+                                  />
+                                </Field>
               </div>
             </FieldGroup>
           </FieldSet>
@@ -250,6 +278,8 @@ export default function RegistrationForm() {
               {isPending ? "Registering..." : "Register"}
             </Button>
           </Field>
+
+          
           {/* {success && (
           <div className="text-green-600 text-center font-medium">
             Registration successful!

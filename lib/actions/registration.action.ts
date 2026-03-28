@@ -7,6 +7,7 @@ const registrationSchema = z.object({
   lastName: z.string().min(1, "Last name is required"),
   branch: z.string().min(1, "Branch is required"),
   gender: z.enum(["male", "female"]),
+  memberType: z.enum(["member", "visitor"]).default("member"),
   email: z.string().email().optional().or(z.literal("")),
   phone: z.string().optional().or(z.literal("")),
 }).refine((data) => data.email || data.phone, {

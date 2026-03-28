@@ -23,8 +23,12 @@ model Registration {
   phone        String?  @unique
   isAccredited Boolean  @default(false)
   createdAt    DateTime @default(now())
+  memberType   MemberType @default(member)
 }
-
+enum MemberType {
+  member
+  visitor
+}
 
 model User {
   id           String   @id @default(uuid())

@@ -34,6 +34,7 @@ export type RegistrationMinAggregateOutputType = {
   phone: string | null
   isAccredited: boolean | null
   createdAt: Date | null
+  memberType: $Enums.MemberType | null
 }
 
 export type RegistrationMaxAggregateOutputType = {
@@ -46,6 +47,7 @@ export type RegistrationMaxAggregateOutputType = {
   phone: string | null
   isAccredited: boolean | null
   createdAt: Date | null
+  memberType: $Enums.MemberType | null
 }
 
 export type RegistrationCountAggregateOutputType = {
@@ -58,6 +60,7 @@ export type RegistrationCountAggregateOutputType = {
   phone: number
   isAccredited: number
   createdAt: number
+  memberType: number
   _all: number
 }
 
@@ -72,6 +75,7 @@ export type RegistrationMinAggregateInputType = {
   phone?: true
   isAccredited?: true
   createdAt?: true
+  memberType?: true
 }
 
 export type RegistrationMaxAggregateInputType = {
@@ -84,6 +88,7 @@ export type RegistrationMaxAggregateInputType = {
   phone?: true
   isAccredited?: true
   createdAt?: true
+  memberType?: true
 }
 
 export type RegistrationCountAggregateInputType = {
@@ -96,6 +101,7 @@ export type RegistrationCountAggregateInputType = {
   phone?: true
   isAccredited?: true
   createdAt?: true
+  memberType?: true
   _all?: true
 }
 
@@ -181,6 +187,7 @@ export type RegistrationGroupByOutputType = {
   phone: string | null
   isAccredited: boolean
   createdAt: Date
+  memberType: $Enums.MemberType
   _count: RegistrationCountAggregateOutputType | null
   _min: RegistrationMinAggregateOutputType | null
   _max: RegistrationMaxAggregateOutputType | null
@@ -214,6 +221,7 @@ export type RegistrationWhereInput = {
   phone?: Prisma.StringNullableFilter<"Registration"> | string | null
   isAccredited?: Prisma.BoolFilter<"Registration"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Registration"> | Date | string
+  memberType?: Prisma.EnumMemberTypeFilter<"Registration"> | $Enums.MemberType
 }
 
 export type RegistrationOrderByWithRelationInput = {
@@ -226,6 +234,7 @@ export type RegistrationOrderByWithRelationInput = {
   phone?: Prisma.SortOrderInput | Prisma.SortOrder
   isAccredited?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  memberType?: Prisma.SortOrder
 }
 
 export type RegistrationWhereUniqueInput = Prisma.AtLeast<{
@@ -241,6 +250,7 @@ export type RegistrationWhereUniqueInput = Prisma.AtLeast<{
   gender?: Prisma.EnumGenderFilter<"Registration"> | $Enums.Gender
   isAccredited?: Prisma.BoolFilter<"Registration"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Registration"> | Date | string
+  memberType?: Prisma.EnumMemberTypeFilter<"Registration"> | $Enums.MemberType
 }, "id" | "email" | "phone">
 
 export type RegistrationOrderByWithAggregationInput = {
@@ -253,6 +263,7 @@ export type RegistrationOrderByWithAggregationInput = {
   phone?: Prisma.SortOrderInput | Prisma.SortOrder
   isAccredited?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  memberType?: Prisma.SortOrder
   _count?: Prisma.RegistrationCountOrderByAggregateInput
   _max?: Prisma.RegistrationMaxOrderByAggregateInput
   _min?: Prisma.RegistrationMinOrderByAggregateInput
@@ -271,6 +282,7 @@ export type RegistrationScalarWhereWithAggregatesInput = {
   phone?: Prisma.StringNullableWithAggregatesFilter<"Registration"> | string | null
   isAccredited?: Prisma.BoolWithAggregatesFilter<"Registration"> | boolean
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Registration"> | Date | string
+  memberType?: Prisma.EnumMemberTypeWithAggregatesFilter<"Registration"> | $Enums.MemberType
 }
 
 export type RegistrationCreateInput = {
@@ -283,6 +295,7 @@ export type RegistrationCreateInput = {
   phone?: string | null
   isAccredited?: boolean
   createdAt?: Date | string
+  memberType?: $Enums.MemberType
 }
 
 export type RegistrationUncheckedCreateInput = {
@@ -295,6 +308,7 @@ export type RegistrationUncheckedCreateInput = {
   phone?: string | null
   isAccredited?: boolean
   createdAt?: Date | string
+  memberType?: $Enums.MemberType
 }
 
 export type RegistrationUpdateInput = {
@@ -307,6 +321,7 @@ export type RegistrationUpdateInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isAccredited?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  memberType?: Prisma.EnumMemberTypeFieldUpdateOperationsInput | $Enums.MemberType
 }
 
 export type RegistrationUncheckedUpdateInput = {
@@ -319,6 +334,7 @@ export type RegistrationUncheckedUpdateInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isAccredited?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  memberType?: Prisma.EnumMemberTypeFieldUpdateOperationsInput | $Enums.MemberType
 }
 
 export type RegistrationCreateManyInput = {
@@ -331,6 +347,7 @@ export type RegistrationCreateManyInput = {
   phone?: string | null
   isAccredited?: boolean
   createdAt?: Date | string
+  memberType?: $Enums.MemberType
 }
 
 export type RegistrationUpdateManyMutationInput = {
@@ -343,6 +360,7 @@ export type RegistrationUpdateManyMutationInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isAccredited?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  memberType?: Prisma.EnumMemberTypeFieldUpdateOperationsInput | $Enums.MemberType
 }
 
 export type RegistrationUncheckedUpdateManyInput = {
@@ -355,6 +373,7 @@ export type RegistrationUncheckedUpdateManyInput = {
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isAccredited?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  memberType?: Prisma.EnumMemberTypeFieldUpdateOperationsInput | $Enums.MemberType
 }
 
 export type RegistrationCountOrderByAggregateInput = {
@@ -367,6 +386,7 @@ export type RegistrationCountOrderByAggregateInput = {
   phone?: Prisma.SortOrder
   isAccredited?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  memberType?: Prisma.SortOrder
 }
 
 export type RegistrationMaxOrderByAggregateInput = {
@@ -379,6 +399,7 @@ export type RegistrationMaxOrderByAggregateInput = {
   phone?: Prisma.SortOrder
   isAccredited?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  memberType?: Prisma.SortOrder
 }
 
 export type RegistrationMinOrderByAggregateInput = {
@@ -391,6 +412,7 @@ export type RegistrationMinOrderByAggregateInput = {
   phone?: Prisma.SortOrder
   isAccredited?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
+  memberType?: Prisma.SortOrder
 }
 
 export type StringFieldUpdateOperationsInput = {
@@ -413,6 +435,10 @@ export type DateTimeFieldUpdateOperationsInput = {
   set?: Date | string
 }
 
+export type EnumMemberTypeFieldUpdateOperationsInput = {
+  set?: $Enums.MemberType
+}
+
 
 
 export type RegistrationSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -425,6 +451,7 @@ export type RegistrationSelect<ExtArgs extends runtime.Types.Extensions.Internal
   phone?: boolean
   isAccredited?: boolean
   createdAt?: boolean
+  memberType?: boolean
 }, ExtArgs["result"]["registration"]>
 
 export type RegistrationSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -437,6 +464,7 @@ export type RegistrationSelectCreateManyAndReturn<ExtArgs extends runtime.Types.
   phone?: boolean
   isAccredited?: boolean
   createdAt?: boolean
+  memberType?: boolean
 }, ExtArgs["result"]["registration"]>
 
 export type RegistrationSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -449,6 +477,7 @@ export type RegistrationSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.
   phone?: boolean
   isAccredited?: boolean
   createdAt?: boolean
+  memberType?: boolean
 }, ExtArgs["result"]["registration"]>
 
 export type RegistrationSelectScalar = {
@@ -461,9 +490,10 @@ export type RegistrationSelectScalar = {
   phone?: boolean
   isAccredited?: boolean
   createdAt?: boolean
+  memberType?: boolean
 }
 
-export type RegistrationOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "firstName" | "lastName" | "branch" | "gender" | "email" | "phone" | "isAccredited" | "createdAt", ExtArgs["result"]["registration"]>
+export type RegistrationOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "firstName" | "lastName" | "branch" | "gender" | "email" | "phone" | "isAccredited" | "createdAt" | "memberType", ExtArgs["result"]["registration"]>
 
 export type $RegistrationPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Registration"
@@ -478,6 +508,7 @@ export type $RegistrationPayload<ExtArgs extends runtime.Types.Extensions.Intern
     phone: string | null
     isAccredited: boolean
     createdAt: Date
+    memberType: $Enums.MemberType
   }, ExtArgs["result"]["registration"]>
   composites: {}
 }
@@ -910,6 +941,7 @@ export interface RegistrationFieldRefs {
   readonly phone: Prisma.FieldRef<"Registration", 'String'>
   readonly isAccredited: Prisma.FieldRef<"Registration", 'Boolean'>
   readonly createdAt: Prisma.FieldRef<"Registration", 'DateTime'>
+  readonly memberType: Prisma.FieldRef<"Registration", 'MemberType'>
 }
     
 
