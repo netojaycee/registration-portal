@@ -97,32 +97,46 @@ export default function AdminDashboard() {
   >("all");
 
   function handleExportExcel() {
-    let exportUsers = users;
-    if (exportType === "accredited") {
-      exportUsers = users.filter((u: any) => u.isAccredited);
-    } else if (exportType === "unaccredited") {
-      exportUsers = users.filter((u: any) => !u.isAccredited);
-    }
-    if (!exportUsers.length) {
-      toast.info("No users to export for this selection.");
-      return;
-    }
-    const exportData = exportUsers.map((u: any) => ({
-      "First Name": u.firstName,
-      "Last Name": u.lastName,
-      Email: u.email,
-      Branch: u.branch,
-      Gender: u.gender,
-      Accredited: u.isAccredited ? "Yes" : "No",
-    }));
-    const ws = XLSX.utils.json_to_sheet(exportData);
-    const wb = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wb, ws, "Users");
-    let filename = "users";
-    if (exportType === "accredited") filename = "accredited-users";
-    if (exportType === "unaccredited") filename = "unaccredited-users";
-    XLSX.writeFile(wb, `${filename}.xlsx`);
+  let exportUsers = users;
+  if (exportType === "accredited") {
+    exportUsers = users.filter((u: any) => u.isAccredited);
+  } else if (exportType === "unaccredited") {
+    exportUsers = users.filter((u: any) => !u.isAccredited);
   }
+  if (!exportUsers.length) {
+    toast.info("No users to export for this selection.");
+    return;
+  }
+  const exportData = exportUsers.map((u: any) => ({
+    firstName: u.firstName || "",
+    lastName: u.lastName || "",
+    email: u.email || "",
+    username: u.username || "",
+    phoneNumber: u.phoneNumber || "",
+    gender: u.gender || "",
+    maritalStatus: u.maritalStatus || "",
+    membershipStatus: u.membershipStatus || "",
+    modeOfAttendance: u.modeOfAttendance || "",
+    area: u.area || "",
+    branch: u.branch || "",
+    cluster: u.cluster || "",
+    accommodation: u.accommodation || "",
+    educationCareer: u.educationCareer || "",
+    classLevel: u.classLevel || "",
+    classDivision: u.classDivision || "",
+    faculty: u.faculty || "",
+    job: u.job || "",
+    address: u.address || "",
+    Accredited: u.isAccredited ? "Yes" : "No",
+  }));
+  const ws = XLSX.utils.json_to_sheet(exportData);
+  const wb = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb, ws, "Users");
+  let filename = "users";
+  if (exportType === "accredited") filename = "accredited-users";
+  if (exportType === "unaccredited") filename = "unaccredited-users";
+  XLSX.writeFile(wb, `${filename}.xlsx`);
+}
 
   return (
     <div className="max-w-7xl mx-auto">

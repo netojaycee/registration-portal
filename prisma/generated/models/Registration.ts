@@ -28,39 +28,75 @@ export type RegistrationMinAggregateOutputType = {
   id: string | null
   firstName: string | null
   lastName: string | null
-  branch: string | null
-  gender: $Enums.Gender | null
   email: string | null
-  phone: string | null
+  username: string | null
+  phoneNumber: string | null
+  gender: string | null
+  maritalStatus: string | null
+  membershipStatus: string | null
+  modeOfAttendance: string | null
+  area: string | null
+  branch: string | null
+  cluster: string | null
+  accommodation: string | null
+  educationCareer: string | null
+  classLevel: string | null
+  classDivision: string | null
+  faculty: string | null
+  job: string | null
+  address: string | null
   isAccredited: boolean | null
   createdAt: Date | null
-  memberType: $Enums.MemberType | null
 }
 
 export type RegistrationMaxAggregateOutputType = {
   id: string | null
   firstName: string | null
   lastName: string | null
-  branch: string | null
-  gender: $Enums.Gender | null
   email: string | null
-  phone: string | null
+  username: string | null
+  phoneNumber: string | null
+  gender: string | null
+  maritalStatus: string | null
+  membershipStatus: string | null
+  modeOfAttendance: string | null
+  area: string | null
+  branch: string | null
+  cluster: string | null
+  accommodation: string | null
+  educationCareer: string | null
+  classLevel: string | null
+  classDivision: string | null
+  faculty: string | null
+  job: string | null
+  address: string | null
   isAccredited: boolean | null
   createdAt: Date | null
-  memberType: $Enums.MemberType | null
 }
 
 export type RegistrationCountAggregateOutputType = {
   id: number
   firstName: number
   lastName: number
-  branch: number
-  gender: number
   email: number
-  phone: number
+  username: number
+  phoneNumber: number
+  gender: number
+  maritalStatus: number
+  membershipStatus: number
+  modeOfAttendance: number
+  area: number
+  branch: number
+  cluster: number
+  accommodation: number
+  educationCareer: number
+  classLevel: number
+  classDivision: number
+  faculty: number
+  job: number
+  address: number
   isAccredited: number
   createdAt: number
-  memberType: number
   _all: number
 }
 
@@ -69,39 +105,75 @@ export type RegistrationMinAggregateInputType = {
   id?: true
   firstName?: true
   lastName?: true
-  branch?: true
-  gender?: true
   email?: true
-  phone?: true
+  username?: true
+  phoneNumber?: true
+  gender?: true
+  maritalStatus?: true
+  membershipStatus?: true
+  modeOfAttendance?: true
+  area?: true
+  branch?: true
+  cluster?: true
+  accommodation?: true
+  educationCareer?: true
+  classLevel?: true
+  classDivision?: true
+  faculty?: true
+  job?: true
+  address?: true
   isAccredited?: true
   createdAt?: true
-  memberType?: true
 }
 
 export type RegistrationMaxAggregateInputType = {
   id?: true
   firstName?: true
   lastName?: true
-  branch?: true
-  gender?: true
   email?: true
-  phone?: true
+  username?: true
+  phoneNumber?: true
+  gender?: true
+  maritalStatus?: true
+  membershipStatus?: true
+  modeOfAttendance?: true
+  area?: true
+  branch?: true
+  cluster?: true
+  accommodation?: true
+  educationCareer?: true
+  classLevel?: true
+  classDivision?: true
+  faculty?: true
+  job?: true
+  address?: true
   isAccredited?: true
   createdAt?: true
-  memberType?: true
 }
 
 export type RegistrationCountAggregateInputType = {
   id?: true
   firstName?: true
   lastName?: true
-  branch?: true
-  gender?: true
   email?: true
-  phone?: true
+  username?: true
+  phoneNumber?: true
+  gender?: true
+  maritalStatus?: true
+  membershipStatus?: true
+  modeOfAttendance?: true
+  area?: true
+  branch?: true
+  cluster?: true
+  accommodation?: true
+  educationCareer?: true
+  classLevel?: true
+  classDivision?: true
+  faculty?: true
+  job?: true
+  address?: true
   isAccredited?: true
   createdAt?: true
-  memberType?: true
   _all?: true
 }
 
@@ -181,13 +253,25 @@ export type RegistrationGroupByOutputType = {
   id: string
   firstName: string
   lastName: string
-  branch: string
-  gender: $Enums.Gender
   email: string | null
-  phone: string | null
+  username: string | null
+  phoneNumber: string | null
+  gender: string
+  maritalStatus: string
+  membershipStatus: string
+  modeOfAttendance: string
+  area: string | null
+  branch: string | null
+  cluster: string | null
+  accommodation: string
+  educationCareer: string
+  classLevel: string | null
+  classDivision: string | null
+  faculty: string | null
+  job: string | null
+  address: string | null
   isAccredited: boolean
   createdAt: Date
-  memberType: $Enums.MemberType
   _count: RegistrationCountAggregateOutputType | null
   _min: RegistrationMinAggregateOutputType | null
   _max: RegistrationMaxAggregateOutputType | null
@@ -215,55 +299,103 @@ export type RegistrationWhereInput = {
   id?: Prisma.StringFilter<"Registration"> | string
   firstName?: Prisma.StringFilter<"Registration"> | string
   lastName?: Prisma.StringFilter<"Registration"> | string
-  branch?: Prisma.StringFilter<"Registration"> | string
-  gender?: Prisma.EnumGenderFilter<"Registration"> | $Enums.Gender
   email?: Prisma.StringNullableFilter<"Registration"> | string | null
-  phone?: Prisma.StringNullableFilter<"Registration"> | string | null
+  username?: Prisma.StringNullableFilter<"Registration"> | string | null
+  phoneNumber?: Prisma.StringNullableFilter<"Registration"> | string | null
+  gender?: Prisma.StringFilter<"Registration"> | string
+  maritalStatus?: Prisma.StringFilter<"Registration"> | string
+  membershipStatus?: Prisma.StringFilter<"Registration"> | string
+  modeOfAttendance?: Prisma.StringFilter<"Registration"> | string
+  area?: Prisma.StringNullableFilter<"Registration"> | string | null
+  branch?: Prisma.StringNullableFilter<"Registration"> | string | null
+  cluster?: Prisma.StringNullableFilter<"Registration"> | string | null
+  accommodation?: Prisma.StringFilter<"Registration"> | string
+  educationCareer?: Prisma.StringFilter<"Registration"> | string
+  classLevel?: Prisma.StringNullableFilter<"Registration"> | string | null
+  classDivision?: Prisma.StringNullableFilter<"Registration"> | string | null
+  faculty?: Prisma.StringNullableFilter<"Registration"> | string | null
+  job?: Prisma.StringNullableFilter<"Registration"> | string | null
+  address?: Prisma.StringNullableFilter<"Registration"> | string | null
   isAccredited?: Prisma.BoolFilter<"Registration"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Registration"> | Date | string
-  memberType?: Prisma.EnumMemberTypeFilter<"Registration"> | $Enums.MemberType
 }
 
 export type RegistrationOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   firstName?: Prisma.SortOrder
   lastName?: Prisma.SortOrder
-  branch?: Prisma.SortOrder
-  gender?: Prisma.SortOrder
   email?: Prisma.SortOrderInput | Prisma.SortOrder
-  phone?: Prisma.SortOrderInput | Prisma.SortOrder
+  username?: Prisma.SortOrderInput | Prisma.SortOrder
+  phoneNumber?: Prisma.SortOrderInput | Prisma.SortOrder
+  gender?: Prisma.SortOrder
+  maritalStatus?: Prisma.SortOrder
+  membershipStatus?: Prisma.SortOrder
+  modeOfAttendance?: Prisma.SortOrder
+  area?: Prisma.SortOrderInput | Prisma.SortOrder
+  branch?: Prisma.SortOrderInput | Prisma.SortOrder
+  cluster?: Prisma.SortOrderInput | Prisma.SortOrder
+  accommodation?: Prisma.SortOrder
+  educationCareer?: Prisma.SortOrder
+  classLevel?: Prisma.SortOrderInput | Prisma.SortOrder
+  classDivision?: Prisma.SortOrderInput | Prisma.SortOrder
+  faculty?: Prisma.SortOrderInput | Prisma.SortOrder
+  job?: Prisma.SortOrderInput | Prisma.SortOrder
+  address?: Prisma.SortOrderInput | Prisma.SortOrder
   isAccredited?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
-  memberType?: Prisma.SortOrder
 }
 
 export type RegistrationWhereUniqueInput = Prisma.AtLeast<{
   id?: string
   email?: string
-  phone?: string
+  phoneNumber?: string
   AND?: Prisma.RegistrationWhereInput | Prisma.RegistrationWhereInput[]
   OR?: Prisma.RegistrationWhereInput[]
   NOT?: Prisma.RegistrationWhereInput | Prisma.RegistrationWhereInput[]
   firstName?: Prisma.StringFilter<"Registration"> | string
   lastName?: Prisma.StringFilter<"Registration"> | string
-  branch?: Prisma.StringFilter<"Registration"> | string
-  gender?: Prisma.EnumGenderFilter<"Registration"> | $Enums.Gender
+  username?: Prisma.StringNullableFilter<"Registration"> | string | null
+  gender?: Prisma.StringFilter<"Registration"> | string
+  maritalStatus?: Prisma.StringFilter<"Registration"> | string
+  membershipStatus?: Prisma.StringFilter<"Registration"> | string
+  modeOfAttendance?: Prisma.StringFilter<"Registration"> | string
+  area?: Prisma.StringNullableFilter<"Registration"> | string | null
+  branch?: Prisma.StringNullableFilter<"Registration"> | string | null
+  cluster?: Prisma.StringNullableFilter<"Registration"> | string | null
+  accommodation?: Prisma.StringFilter<"Registration"> | string
+  educationCareer?: Prisma.StringFilter<"Registration"> | string
+  classLevel?: Prisma.StringNullableFilter<"Registration"> | string | null
+  classDivision?: Prisma.StringNullableFilter<"Registration"> | string | null
+  faculty?: Prisma.StringNullableFilter<"Registration"> | string | null
+  job?: Prisma.StringNullableFilter<"Registration"> | string | null
+  address?: Prisma.StringNullableFilter<"Registration"> | string | null
   isAccredited?: Prisma.BoolFilter<"Registration"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Registration"> | Date | string
-  memberType?: Prisma.EnumMemberTypeFilter<"Registration"> | $Enums.MemberType
-}, "id" | "email" | "phone">
+}, "id" | "email" | "phoneNumber">
 
 export type RegistrationOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   firstName?: Prisma.SortOrder
   lastName?: Prisma.SortOrder
-  branch?: Prisma.SortOrder
-  gender?: Prisma.SortOrder
   email?: Prisma.SortOrderInput | Prisma.SortOrder
-  phone?: Prisma.SortOrderInput | Prisma.SortOrder
+  username?: Prisma.SortOrderInput | Prisma.SortOrder
+  phoneNumber?: Prisma.SortOrderInput | Prisma.SortOrder
+  gender?: Prisma.SortOrder
+  maritalStatus?: Prisma.SortOrder
+  membershipStatus?: Prisma.SortOrder
+  modeOfAttendance?: Prisma.SortOrder
+  area?: Prisma.SortOrderInput | Prisma.SortOrder
+  branch?: Prisma.SortOrderInput | Prisma.SortOrder
+  cluster?: Prisma.SortOrderInput | Prisma.SortOrder
+  accommodation?: Prisma.SortOrder
+  educationCareer?: Prisma.SortOrder
+  classLevel?: Prisma.SortOrderInput | Prisma.SortOrder
+  classDivision?: Prisma.SortOrderInput | Prisma.SortOrder
+  faculty?: Prisma.SortOrderInput | Prisma.SortOrder
+  job?: Prisma.SortOrderInput | Prisma.SortOrder
+  address?: Prisma.SortOrderInput | Prisma.SortOrder
   isAccredited?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
-  memberType?: Prisma.SortOrder
   _count?: Prisma.RegistrationCountOrderByAggregateInput
   _max?: Prisma.RegistrationMaxOrderByAggregateInput
   _min?: Prisma.RegistrationMinOrderByAggregateInput
@@ -276,151 +408,279 @@ export type RegistrationScalarWhereWithAggregatesInput = {
   id?: Prisma.StringWithAggregatesFilter<"Registration"> | string
   firstName?: Prisma.StringWithAggregatesFilter<"Registration"> | string
   lastName?: Prisma.StringWithAggregatesFilter<"Registration"> | string
-  branch?: Prisma.StringWithAggregatesFilter<"Registration"> | string
-  gender?: Prisma.EnumGenderWithAggregatesFilter<"Registration"> | $Enums.Gender
   email?: Prisma.StringNullableWithAggregatesFilter<"Registration"> | string | null
-  phone?: Prisma.StringNullableWithAggregatesFilter<"Registration"> | string | null
+  username?: Prisma.StringNullableWithAggregatesFilter<"Registration"> | string | null
+  phoneNumber?: Prisma.StringNullableWithAggregatesFilter<"Registration"> | string | null
+  gender?: Prisma.StringWithAggregatesFilter<"Registration"> | string
+  maritalStatus?: Prisma.StringWithAggregatesFilter<"Registration"> | string
+  membershipStatus?: Prisma.StringWithAggregatesFilter<"Registration"> | string
+  modeOfAttendance?: Prisma.StringWithAggregatesFilter<"Registration"> | string
+  area?: Prisma.StringNullableWithAggregatesFilter<"Registration"> | string | null
+  branch?: Prisma.StringNullableWithAggregatesFilter<"Registration"> | string | null
+  cluster?: Prisma.StringNullableWithAggregatesFilter<"Registration"> | string | null
+  accommodation?: Prisma.StringWithAggregatesFilter<"Registration"> | string
+  educationCareer?: Prisma.StringWithAggregatesFilter<"Registration"> | string
+  classLevel?: Prisma.StringNullableWithAggregatesFilter<"Registration"> | string | null
+  classDivision?: Prisma.StringNullableWithAggregatesFilter<"Registration"> | string | null
+  faculty?: Prisma.StringNullableWithAggregatesFilter<"Registration"> | string | null
+  job?: Prisma.StringNullableWithAggregatesFilter<"Registration"> | string | null
+  address?: Prisma.StringNullableWithAggregatesFilter<"Registration"> | string | null
   isAccredited?: Prisma.BoolWithAggregatesFilter<"Registration"> | boolean
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Registration"> | Date | string
-  memberType?: Prisma.EnumMemberTypeWithAggregatesFilter<"Registration"> | $Enums.MemberType
 }
 
 export type RegistrationCreateInput = {
   id?: string
   firstName: string
   lastName: string
-  branch: string
-  gender: $Enums.Gender
   email?: string | null
-  phone?: string | null
+  username?: string | null
+  phoneNumber?: string | null
+  gender: string
+  maritalStatus: string
+  membershipStatus: string
+  modeOfAttendance: string
+  area?: string | null
+  branch?: string | null
+  cluster?: string | null
+  accommodation: string
+  educationCareer: string
+  classLevel?: string | null
+  classDivision?: string | null
+  faculty?: string | null
+  job?: string | null
+  address?: string | null
   isAccredited?: boolean
   createdAt?: Date | string
-  memberType?: $Enums.MemberType
 }
 
 export type RegistrationUncheckedCreateInput = {
   id?: string
   firstName: string
   lastName: string
-  branch: string
-  gender: $Enums.Gender
   email?: string | null
-  phone?: string | null
+  username?: string | null
+  phoneNumber?: string | null
+  gender: string
+  maritalStatus: string
+  membershipStatus: string
+  modeOfAttendance: string
+  area?: string | null
+  branch?: string | null
+  cluster?: string | null
+  accommodation: string
+  educationCareer: string
+  classLevel?: string | null
+  classDivision?: string | null
+  faculty?: string | null
+  job?: string | null
+  address?: string | null
   isAccredited?: boolean
   createdAt?: Date | string
-  memberType?: $Enums.MemberType
 }
 
 export type RegistrationUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
-  branch?: Prisma.StringFieldUpdateOperationsInput | string
-  gender?: Prisma.EnumGenderFieldUpdateOperationsInput | $Enums.Gender
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gender?: Prisma.StringFieldUpdateOperationsInput | string
+  maritalStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  membershipStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  modeOfAttendance?: Prisma.StringFieldUpdateOperationsInput | string
+  area?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  branch?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cluster?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accommodation?: Prisma.StringFieldUpdateOperationsInput | string
+  educationCareer?: Prisma.StringFieldUpdateOperationsInput | string
+  classLevel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  classDivision?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  faculty?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  job?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isAccredited?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  memberType?: Prisma.EnumMemberTypeFieldUpdateOperationsInput | $Enums.MemberType
 }
 
 export type RegistrationUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
-  branch?: Prisma.StringFieldUpdateOperationsInput | string
-  gender?: Prisma.EnumGenderFieldUpdateOperationsInput | $Enums.Gender
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gender?: Prisma.StringFieldUpdateOperationsInput | string
+  maritalStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  membershipStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  modeOfAttendance?: Prisma.StringFieldUpdateOperationsInput | string
+  area?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  branch?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cluster?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accommodation?: Prisma.StringFieldUpdateOperationsInput | string
+  educationCareer?: Prisma.StringFieldUpdateOperationsInput | string
+  classLevel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  classDivision?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  faculty?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  job?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isAccredited?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  memberType?: Prisma.EnumMemberTypeFieldUpdateOperationsInput | $Enums.MemberType
 }
 
 export type RegistrationCreateManyInput = {
   id?: string
   firstName: string
   lastName: string
-  branch: string
-  gender: $Enums.Gender
   email?: string | null
-  phone?: string | null
+  username?: string | null
+  phoneNumber?: string | null
+  gender: string
+  maritalStatus: string
+  membershipStatus: string
+  modeOfAttendance: string
+  area?: string | null
+  branch?: string | null
+  cluster?: string | null
+  accommodation: string
+  educationCareer: string
+  classLevel?: string | null
+  classDivision?: string | null
+  faculty?: string | null
+  job?: string | null
+  address?: string | null
   isAccredited?: boolean
   createdAt?: Date | string
-  memberType?: $Enums.MemberType
 }
 
 export type RegistrationUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
-  branch?: Prisma.StringFieldUpdateOperationsInput | string
-  gender?: Prisma.EnumGenderFieldUpdateOperationsInput | $Enums.Gender
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gender?: Prisma.StringFieldUpdateOperationsInput | string
+  maritalStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  membershipStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  modeOfAttendance?: Prisma.StringFieldUpdateOperationsInput | string
+  area?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  branch?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cluster?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accommodation?: Prisma.StringFieldUpdateOperationsInput | string
+  educationCareer?: Prisma.StringFieldUpdateOperationsInput | string
+  classLevel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  classDivision?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  faculty?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  job?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isAccredited?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  memberType?: Prisma.EnumMemberTypeFieldUpdateOperationsInput | $Enums.MemberType
 }
 
 export type RegistrationUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   firstName?: Prisma.StringFieldUpdateOperationsInput | string
   lastName?: Prisma.StringFieldUpdateOperationsInput | string
-  branch?: Prisma.StringFieldUpdateOperationsInput | string
-  gender?: Prisma.EnumGenderFieldUpdateOperationsInput | $Enums.Gender
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  gender?: Prisma.StringFieldUpdateOperationsInput | string
+  maritalStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  membershipStatus?: Prisma.StringFieldUpdateOperationsInput | string
+  modeOfAttendance?: Prisma.StringFieldUpdateOperationsInput | string
+  area?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  branch?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  cluster?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accommodation?: Prisma.StringFieldUpdateOperationsInput | string
+  educationCareer?: Prisma.StringFieldUpdateOperationsInput | string
+  classLevel?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  classDivision?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  faculty?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  job?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isAccredited?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  memberType?: Prisma.EnumMemberTypeFieldUpdateOperationsInput | $Enums.MemberType
 }
 
 export type RegistrationCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   firstName?: Prisma.SortOrder
   lastName?: Prisma.SortOrder
-  branch?: Prisma.SortOrder
-  gender?: Prisma.SortOrder
   email?: Prisma.SortOrder
-  phone?: Prisma.SortOrder
+  username?: Prisma.SortOrder
+  phoneNumber?: Prisma.SortOrder
+  gender?: Prisma.SortOrder
+  maritalStatus?: Prisma.SortOrder
+  membershipStatus?: Prisma.SortOrder
+  modeOfAttendance?: Prisma.SortOrder
+  area?: Prisma.SortOrder
+  branch?: Prisma.SortOrder
+  cluster?: Prisma.SortOrder
+  accommodation?: Prisma.SortOrder
+  educationCareer?: Prisma.SortOrder
+  classLevel?: Prisma.SortOrder
+  classDivision?: Prisma.SortOrder
+  faculty?: Prisma.SortOrder
+  job?: Prisma.SortOrder
+  address?: Prisma.SortOrder
   isAccredited?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
-  memberType?: Prisma.SortOrder
 }
 
 export type RegistrationMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   firstName?: Prisma.SortOrder
   lastName?: Prisma.SortOrder
-  branch?: Prisma.SortOrder
-  gender?: Prisma.SortOrder
   email?: Prisma.SortOrder
-  phone?: Prisma.SortOrder
+  username?: Prisma.SortOrder
+  phoneNumber?: Prisma.SortOrder
+  gender?: Prisma.SortOrder
+  maritalStatus?: Prisma.SortOrder
+  membershipStatus?: Prisma.SortOrder
+  modeOfAttendance?: Prisma.SortOrder
+  area?: Prisma.SortOrder
+  branch?: Prisma.SortOrder
+  cluster?: Prisma.SortOrder
+  accommodation?: Prisma.SortOrder
+  educationCareer?: Prisma.SortOrder
+  classLevel?: Prisma.SortOrder
+  classDivision?: Prisma.SortOrder
+  faculty?: Prisma.SortOrder
+  job?: Prisma.SortOrder
+  address?: Prisma.SortOrder
   isAccredited?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
-  memberType?: Prisma.SortOrder
 }
 
 export type RegistrationMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   firstName?: Prisma.SortOrder
   lastName?: Prisma.SortOrder
-  branch?: Prisma.SortOrder
-  gender?: Prisma.SortOrder
   email?: Prisma.SortOrder
-  phone?: Prisma.SortOrder
+  username?: Prisma.SortOrder
+  phoneNumber?: Prisma.SortOrder
+  gender?: Prisma.SortOrder
+  maritalStatus?: Prisma.SortOrder
+  membershipStatus?: Prisma.SortOrder
+  modeOfAttendance?: Prisma.SortOrder
+  area?: Prisma.SortOrder
+  branch?: Prisma.SortOrder
+  cluster?: Prisma.SortOrder
+  accommodation?: Prisma.SortOrder
+  educationCareer?: Prisma.SortOrder
+  classLevel?: Prisma.SortOrder
+  classDivision?: Prisma.SortOrder
+  faculty?: Prisma.SortOrder
+  job?: Prisma.SortOrder
+  address?: Prisma.SortOrder
   isAccredited?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
-  memberType?: Prisma.SortOrder
 }
 
 export type StringFieldUpdateOperationsInput = {
   set?: string
-}
-
-export type EnumGenderFieldUpdateOperationsInput = {
-  set?: $Enums.Gender
 }
 
 export type NullableStringFieldUpdateOperationsInput = {
@@ -435,65 +695,109 @@ export type DateTimeFieldUpdateOperationsInput = {
   set?: Date | string
 }
 
-export type EnumMemberTypeFieldUpdateOperationsInput = {
-  set?: $Enums.MemberType
-}
-
 
 
 export type RegistrationSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   firstName?: boolean
   lastName?: boolean
-  branch?: boolean
-  gender?: boolean
   email?: boolean
-  phone?: boolean
+  username?: boolean
+  phoneNumber?: boolean
+  gender?: boolean
+  maritalStatus?: boolean
+  membershipStatus?: boolean
+  modeOfAttendance?: boolean
+  area?: boolean
+  branch?: boolean
+  cluster?: boolean
+  accommodation?: boolean
+  educationCareer?: boolean
+  classLevel?: boolean
+  classDivision?: boolean
+  faculty?: boolean
+  job?: boolean
+  address?: boolean
   isAccredited?: boolean
   createdAt?: boolean
-  memberType?: boolean
 }, ExtArgs["result"]["registration"]>
 
 export type RegistrationSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   firstName?: boolean
   lastName?: boolean
-  branch?: boolean
-  gender?: boolean
   email?: boolean
-  phone?: boolean
+  username?: boolean
+  phoneNumber?: boolean
+  gender?: boolean
+  maritalStatus?: boolean
+  membershipStatus?: boolean
+  modeOfAttendance?: boolean
+  area?: boolean
+  branch?: boolean
+  cluster?: boolean
+  accommodation?: boolean
+  educationCareer?: boolean
+  classLevel?: boolean
+  classDivision?: boolean
+  faculty?: boolean
+  job?: boolean
+  address?: boolean
   isAccredited?: boolean
   createdAt?: boolean
-  memberType?: boolean
 }, ExtArgs["result"]["registration"]>
 
 export type RegistrationSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   firstName?: boolean
   lastName?: boolean
-  branch?: boolean
-  gender?: boolean
   email?: boolean
-  phone?: boolean
+  username?: boolean
+  phoneNumber?: boolean
+  gender?: boolean
+  maritalStatus?: boolean
+  membershipStatus?: boolean
+  modeOfAttendance?: boolean
+  area?: boolean
+  branch?: boolean
+  cluster?: boolean
+  accommodation?: boolean
+  educationCareer?: boolean
+  classLevel?: boolean
+  classDivision?: boolean
+  faculty?: boolean
+  job?: boolean
+  address?: boolean
   isAccredited?: boolean
   createdAt?: boolean
-  memberType?: boolean
 }, ExtArgs["result"]["registration"]>
 
 export type RegistrationSelectScalar = {
   id?: boolean
   firstName?: boolean
   lastName?: boolean
-  branch?: boolean
-  gender?: boolean
   email?: boolean
-  phone?: boolean
+  username?: boolean
+  phoneNumber?: boolean
+  gender?: boolean
+  maritalStatus?: boolean
+  membershipStatus?: boolean
+  modeOfAttendance?: boolean
+  area?: boolean
+  branch?: boolean
+  cluster?: boolean
+  accommodation?: boolean
+  educationCareer?: boolean
+  classLevel?: boolean
+  classDivision?: boolean
+  faculty?: boolean
+  job?: boolean
+  address?: boolean
   isAccredited?: boolean
   createdAt?: boolean
-  memberType?: boolean
 }
 
-export type RegistrationOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "firstName" | "lastName" | "branch" | "gender" | "email" | "phone" | "isAccredited" | "createdAt" | "memberType", ExtArgs["result"]["registration"]>
+export type RegistrationOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "firstName" | "lastName" | "email" | "username" | "phoneNumber" | "gender" | "maritalStatus" | "membershipStatus" | "modeOfAttendance" | "area" | "branch" | "cluster" | "accommodation" | "educationCareer" | "classLevel" | "classDivision" | "faculty" | "job" | "address" | "isAccredited" | "createdAt", ExtArgs["result"]["registration"]>
 
 export type $RegistrationPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Registration"
@@ -502,13 +806,25 @@ export type $RegistrationPayload<ExtArgs extends runtime.Types.Extensions.Intern
     id: string
     firstName: string
     lastName: string
-    branch: string
-    gender: $Enums.Gender
     email: string | null
-    phone: string | null
+    username: string | null
+    phoneNumber: string | null
+    gender: string
+    maritalStatus: string
+    membershipStatus: string
+    modeOfAttendance: string
+    area: string | null
+    branch: string | null
+    cluster: string | null
+    accommodation: string
+    educationCareer: string
+    classLevel: string | null
+    classDivision: string | null
+    faculty: string | null
+    job: string | null
+    address: string | null
     isAccredited: boolean
     createdAt: Date
-    memberType: $Enums.MemberType
   }, ExtArgs["result"]["registration"]>
   composites: {}
 }
@@ -935,13 +1251,25 @@ export interface RegistrationFieldRefs {
   readonly id: Prisma.FieldRef<"Registration", 'String'>
   readonly firstName: Prisma.FieldRef<"Registration", 'String'>
   readonly lastName: Prisma.FieldRef<"Registration", 'String'>
-  readonly branch: Prisma.FieldRef<"Registration", 'String'>
-  readonly gender: Prisma.FieldRef<"Registration", 'Gender'>
   readonly email: Prisma.FieldRef<"Registration", 'String'>
-  readonly phone: Prisma.FieldRef<"Registration", 'String'>
+  readonly username: Prisma.FieldRef<"Registration", 'String'>
+  readonly phoneNumber: Prisma.FieldRef<"Registration", 'String'>
+  readonly gender: Prisma.FieldRef<"Registration", 'String'>
+  readonly maritalStatus: Prisma.FieldRef<"Registration", 'String'>
+  readonly membershipStatus: Prisma.FieldRef<"Registration", 'String'>
+  readonly modeOfAttendance: Prisma.FieldRef<"Registration", 'String'>
+  readonly area: Prisma.FieldRef<"Registration", 'String'>
+  readonly branch: Prisma.FieldRef<"Registration", 'String'>
+  readonly cluster: Prisma.FieldRef<"Registration", 'String'>
+  readonly accommodation: Prisma.FieldRef<"Registration", 'String'>
+  readonly educationCareer: Prisma.FieldRef<"Registration", 'String'>
+  readonly classLevel: Prisma.FieldRef<"Registration", 'String'>
+  readonly classDivision: Prisma.FieldRef<"Registration", 'String'>
+  readonly faculty: Prisma.FieldRef<"Registration", 'String'>
+  readonly job: Prisma.FieldRef<"Registration", 'String'>
+  readonly address: Prisma.FieldRef<"Registration", 'String'>
   readonly isAccredited: Prisma.FieldRef<"Registration", 'Boolean'>
   readonly createdAt: Prisma.FieldRef<"Registration", 'DateTime'>
-  readonly memberType: Prisma.FieldRef<"Registration", 'MemberType'>
 }
     
 

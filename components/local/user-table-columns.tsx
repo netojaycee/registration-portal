@@ -10,7 +10,7 @@ export type UserRow = {
   branch: string;
   gender: string;
   isAccredited: boolean;
-  memberType: "member" | "visitor";
+  membershipStatus: "member" | "visitor";
 };
 
 export function getUserColumns(
@@ -60,11 +60,11 @@ export function getUserColumns(
       header: "Gender",
     },
     {
-      accessorKey: "memberType",
+      accessorKey: "membershipStatus",
       header: "Member Type",
       cell: ({ row }) => (
-        <span className={row.original.memberType === "member" ? "text-blue-700" : "text-pink-700"}>
-          {row.original.memberType.charAt(0).toUpperCase() + row.original.memberType.slice(1)}
+        <span className={row.original.membershipStatus === "member" ? "text-blue-700" : "text-pink-700"}>
+          {row.original.membershipStatus.charAt(0).toUpperCase() + row.original.membershipStatus.slice(1)}
         </span>
       ),
     },

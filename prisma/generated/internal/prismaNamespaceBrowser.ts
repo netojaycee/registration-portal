@@ -75,13 +75,25 @@ export const RegistrationScalarFieldEnum = {
   id: 'id',
   firstName: 'firstName',
   lastName: 'lastName',
-  branch: 'branch',
-  gender: 'gender',
   email: 'email',
-  phone: 'phone',
+  username: 'username',
+  phoneNumber: 'phoneNumber',
+  gender: 'gender',
+  maritalStatus: 'maritalStatus',
+  membershipStatus: 'membershipStatus',
+  modeOfAttendance: 'modeOfAttendance',
+  area: 'area',
+  branch: 'branch',
+  cluster: 'cluster',
+  accommodation: 'accommodation',
+  educationCareer: 'educationCareer',
+  classLevel: 'classLevel',
+  classDivision: 'classDivision',
+  faculty: 'faculty',
+  job: 'job',
+  address: 'address',
   isAccredited: 'isAccredited',
-  createdAt: 'createdAt',
-  memberType: 'memberType'
+  createdAt: 'createdAt'
 } as const
 
 export type RegistrationScalarFieldEnum = (typeof RegistrationScalarFieldEnum)[keyof typeof RegistrationScalarFieldEnum]

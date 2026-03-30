@@ -596,13 +596,25 @@ export const RegistrationScalarFieldEnum = {
   id: 'id',
   firstName: 'firstName',
   lastName: 'lastName',
-  branch: 'branch',
-  gender: 'gender',
   email: 'email',
-  phone: 'phone',
+  username: 'username',
+  phoneNumber: 'phoneNumber',
+  gender: 'gender',
+  maritalStatus: 'maritalStatus',
+  membershipStatus: 'membershipStatus',
+  modeOfAttendance: 'modeOfAttendance',
+  area: 'area',
+  branch: 'branch',
+  cluster: 'cluster',
+  accommodation: 'accommodation',
+  educationCareer: 'educationCareer',
+  classLevel: 'classLevel',
+  classDivision: 'classDivision',
+  faculty: 'faculty',
+  job: 'job',
+  address: 'address',
   isAccredited: 'isAccredited',
-  createdAt: 'createdAt',
-  memberType: 'memberType'
+  createdAt: 'createdAt'
 } as const
 
 export type RegistrationScalarFieldEnum = (typeof RegistrationScalarFieldEnum)[keyof typeof RegistrationScalarFieldEnum]
@@ -664,20 +676,6 @@ export type ListStringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaMod
 
 
 /**
- * Reference to a field of type 'Gender'
- */
-export type EnumGenderFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Gender'>
-    
-
-
-/**
- * Reference to a field of type 'Gender[]'
- */
-export type ListEnumGenderFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Gender[]'>
-    
-
-
-/**
  * Reference to a field of type 'Boolean'
  */
 export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
@@ -695,20 +693,6 @@ export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel
  * Reference to a field of type 'DateTime[]'
  */
 export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
-    
-
-
-/**
- * Reference to a field of type 'MemberType'
- */
-export type EnumMemberTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MemberType'>
-    
-
-
-/**
- * Reference to a field of type 'MemberType[]'
- */
-export type ListEnumMemberTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'MemberType[]'>
     
 
 

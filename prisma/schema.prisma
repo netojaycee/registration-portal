@@ -13,17 +13,32 @@ datasource db {
 }
 
 
+
+
 model Registration {
-  id           String   @id @default(uuid())
-  firstName     String
-  lastName     String
-  branch       String
-  gender       Gender   
-  email        String?  @unique
-  phone        String?  @unique
-  isAccredited Boolean  @default(false)
-  createdAt    DateTime @default(now())
-  memberType   MemberType @default(member)
+  id               String   @id @default(uuid())
+  firstName        String
+  lastName         String
+  email            String?  @unique
+  username         String?
+  phoneNumber      String?  @unique
+  gender           String
+  maritalStatus    String
+  membershipStatus String
+  modeOfAttendance String
+  area             String?
+  branch           String?
+  cluster          String?
+  accommodation    String
+  educationCareer  String
+  classLevel       String?
+  classDivision    String?
+  faculty          String?
+  job              String?
+  address          String?
+    isAccredited Boolean  @default(false)
+
+  createdAt        DateTime @default(now())
 }
 enum MemberType {
   member
