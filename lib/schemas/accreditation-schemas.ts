@@ -6,6 +6,7 @@ export const fetchUsersSchema = z.object({
   firstName: z.string().optional(),
   lastName: z.string().optional(),
   email: z.string().optional(),
+  branch: z.string().optional(),
   isAccredited: z.boolean().optional(),
   page: z.number().int().min(1).optional(),
   pageSize: z.number().int().min(1).max(100).optional(),

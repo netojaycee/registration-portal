@@ -1,12 +1,6 @@
 "use client";
 import * as React from "react";
-import {
-  useReactTable,
-  getCoreRowModel,
-  getFilteredRowModel,
-  getPaginationRowModel,
-  flexRender,
-} from "@tanstack/react-table";
+import { useReactTable, getCoreRowModel, flexRender } from "@tanstack/react-table";
 import { Table, TableHeader, TableBody, TableHead, TableRow, TableCell } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
 import { UserRow } from "./user-table-columns";
@@ -15,19 +9,33 @@ interface DataTableProps {
   columns: any;
   data: UserRow[];
   selected: string[];
+  totalCount: number;
+  isLoading: boolean;
   onSelect: (id: string, checked: boolean) => void;
   onSelectAll: (checked: boolean) => void;
   onAccredit: (id: string) => void;
+  pageIndex: number;
+  pageSize: number;
+  onPageChange: (pageIndex: number, pageSize: number) => void;
 }
 
-export function DataTable({ columns, data, selected, onSelect, onSelectAll, onAccredit }: DataTableProps) {
+export function DataTable({
+  columns,
+  data,
+  selected,
+  totalCount,
+  isLoading,
+  onSelect,
+  onSelectAll,
+  onAccredit,
+  pageIndex,
+  pageSize,
+  onPageChange,
+}: DataTableProps) {
   const table = useReactTable({
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
-    getFilteredRowModel: getFilteredRowModel(),
-    getPaginationRowModel: getPaginationRowModel(),
-    state: {},
   });
 
   return (
@@ -45,7 +53,17 @@ export function DataTable({ columns, data, selected, onSelect, onSelectAll, onAc
           ))}
         </TableHeader>
         <TableBody>
-          {table.getRowModel().rows.length ? (
+          {isLoading ? (
+            Array.from({ length: pageSize }).map((_, idx) => (
+              <TableRow key={`skeleton-${idx}`}>
+                {columns.map((_, ci) => (
+                  <TableCell key={`skeleton-cell-${idx}-${ci}`}>
+                    <div className="h-4 rounded bg-zinc-200 dark:bg-zinc-700 animate-pulse" />
+                  </TableCell>
+                ))}
+              </TableRow>
+            ))
+          ) : table.getRowModel().rows.length ? (
             table.getRowModel().rows.map(row => (
               <TableRow key={row.id} data-state={selected.includes(row.original.id) ? "selected" : undefined}>
                 {row.getVisibleCells().map(cell => (
@@ -67,22 +85,27 @@ export function DataTable({ columns, data, selected, onSelect, onSelectAll, onAc
       {/* Pagination controls */}
       <div className="flex items-center justify-between px-4 py-3 border-t bg-zinc-50 dark:bg-zinc-900">
         <div className="text-sm text-zinc-600 dark:text-zinc-300">
-          Page {table.getState().pagination?.pageIndex + 1 || 1} of {table.getPageCount()}
+          Page {pageIndex + 1} of {Math.max(1, Math.ceil(totalCount / pageSize))}
         </div>
         <div className="flex gap-2">
           <Button
             variant="outline"
             size="sm"
-            onClick={() => table.previousPage()}
-            disabled={!table.getCanPreviousPage()}
+            onClick={() => {
+              if (pageIndex > 0) onPageChange(pageIndex - 1, pageSize);
+            }}
+            disabled={pageIndex <= 0}
           >
             Previous
           </Button>
           <Button
             variant="outline"
             size="sm"
-            onClick={() => table.nextPage()}
-            disabled={!table.getCanNextPage()}
+            onClick={() => {
+              const totalPages = Math.max(1, Math.ceil(totalCount / pageSize));
+              if (pageIndex + 1 < totalPages) onPageChange(pageIndex + 1, pageSize);
+            }}
+            disabled={pageIndex + 1 >= Math.max(1, Math.ceil(totalCount / pageSize))}
           >
             Next
           </Button>

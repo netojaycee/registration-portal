@@ -37,22 +37,26 @@ export interface UserFilters {
   firstName?: string;
   lastName?: string;
   email?: string;
+  branch?: string;
   isAccredited?: boolean;
   page?: number;
   pageSize?: number;
 }
 
-export async function fetchUsers({ firstName, lastName, email, isAccredited, page = 1, pageSize = 10 }: UserFilters) {
+export async function fetchUsers({ firstName, lastName, email, branch, isAccredited, page = 1, pageSize = 10 }: UserFilters) {
   requireAuth();
   const where: any = {};
   if (firstName) where.firstName = { contains: firstName, mode: "insensitive" };
   if (lastName) where.lastName = { contains: lastName, mode: "insensitive" };
   if (email) where.email = { contains: email, mode: "insensitive" };
+  if (branch) where.branch = { equals: branch, mode: "insensitive" };
   if (typeof isAccredited === "boolean") where.isAccredited = isAccredited;
   const skip = (page - 1) * pageSize;
-  const [users, total] = await Promise.all([
+  const [users, total, accreditedCount, unaccreditedCount] = await Promise.all([
     prisma.registration.findMany({ where, skip, take: pageSize, orderBy: { createdAt: "desc" } }),
-    prisma.registration.count({ where })
+    prisma.registration.count({ where }),
+    prisma.registration.count({ where: { ...where, isAccredited: true } }),
+    prisma.registration.count({ where: { ...where, isAccredited: false } }),
   ]);
-  return { users, total };
+  return { users, total, accreditedCount, unaccreditedCount };
 }

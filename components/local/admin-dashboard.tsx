@@ -9,6 +9,14 @@ import * as XLSX from "xlsx";
 import { getUserColumns, UserRow } from "./user-table-columns";
 import { Input } from "@/components/ui/input";
 import {
+  Select,
+  SelectTrigger,
+  SelectValue,
+  SelectContent,
+  SelectItem,
+} from "@/components/ui/select";
+import { BRANCHES } from "@/lib/utils/branches";
+import {
   fetchUsersAction,
   bulkAccreditUsersAction,
   accreditUserAction,
@@ -29,27 +37,30 @@ export default function AdminDashboard() {
     firstName: "",
     lastName: "",
     email: "",
+    branch: "",
     isAccredited: undefined as boolean | undefined,
   });
+  const [page, setPage] = useState(1);
+  const [pageSize, setPageSize] = useState(10);
   const [isPending, startTransition] = useTransition();
 
   useEffect(() => {
     loadUsers();
     // eslint-disable-next-line
-  }, [filters]);
+  }, [filters, page, pageSize]);
 
   async function loadUsers() {
     startTransition(async () => {
-      const res = await fetchUsersAction({ ...filters });
+      const parseFilter = {
+        ...filters,
+        branch: filters.branch === "all" ? undefined : filters.branch,
+      };
+      const res = await fetchUsersAction({ ...parseFilter, page, pageSize });
       if (res && (res as any)?.success) {
         setUsers((res as any)?.users);
         setTotal((res as any)?.total);
-        setAccredited(
-          (res as any)?.users.filter((u: any) => u.isAccredited).length,
-        );
-        setUnaccredited(
-          (res as any)?.users.filter((u: any) => !u.isAccredited).length,
-        );
+        setAccredited((res as any)?.accreditedCount ?? 0);
+        setUnaccredited((res as any)?.unaccreditedCount ?? 0);
 
         console.log("Loaded users:", (res as any)?.users);
       } else {
@@ -97,46 +108,46 @@ export default function AdminDashboard() {
   >("all");
 
   function handleExportExcel() {
-  let exportUsers = users;
-  if (exportType === "accredited") {
-    exportUsers = users.filter((u: any) => u.isAccredited);
-  } else if (exportType === "unaccredited") {
-    exportUsers = users.filter((u: any) => !u.isAccredited);
+    let exportUsers = users;
+    if (exportType === "accredited") {
+      exportUsers = users.filter((u: any) => u.isAccredited);
+    } else if (exportType === "unaccredited") {
+      exportUsers = users.filter((u: any) => !u.isAccredited);
+    }
+    if (!exportUsers.length) {
+      toast.info("No users to export for this selection.");
+      return;
+    }
+    const exportData = exportUsers.map((u: any) => ({
+      firstName: u.firstName || "",
+      lastName: u.lastName || "",
+      email: u.email || "",
+      username: u.username || "",
+      phoneNumber: u.phoneNumber || "",
+      gender: u.gender || "",
+      maritalStatus: u.maritalStatus || "",
+      membershipStatus: u.membershipStatus || "",
+      modeOfAttendance: u.modeOfAttendance || "",
+      area: u.area || "",
+      branch: u.branch || "",
+      cluster: u.cluster || "",
+      accommodation: u.accommodation || "",
+      educationCareer: u.educationCareer || "",
+      classLevel: u.classLevel || "",
+      classDivision: u.classDivision || "",
+      faculty: u.faculty || "",
+      job: u.job || "",
+      address: u.address || "",
+      Accredited: u.isAccredited ? "Yes" : "No",
+    }));
+    const ws = XLSX.utils.json_to_sheet(exportData);
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, "Users");
+    let filename = "users";
+    if (exportType === "accredited") filename = "accredited-users";
+    if (exportType === "unaccredited") filename = "unaccredited-users";
+    XLSX.writeFile(wb, `${filename}.xlsx`);
   }
-  if (!exportUsers.length) {
-    toast.info("No users to export for this selection.");
-    return;
-  }
-  const exportData = exportUsers.map((u: any) => ({
-    firstName: u.firstName || "",
-    lastName: u.lastName || "",
-    email: u.email || "",
-    username: u.username || "",
-    phoneNumber: u.phoneNumber || "",
-    gender: u.gender || "",
-    maritalStatus: u.maritalStatus || "",
-    membershipStatus: u.membershipStatus || "",
-    modeOfAttendance: u.modeOfAttendance || "",
-    area: u.area || "",
-    branch: u.branch || "",
-    cluster: u.cluster || "",
-    accommodation: u.accommodation || "",
-    educationCareer: u.educationCareer || "",
-    classLevel: u.classLevel || "",
-    classDivision: u.classDivision || "",
-    faculty: u.faculty || "",
-    job: u.job || "",
-    address: u.address || "",
-    Accredited: u.isAccredited ? "Yes" : "No",
-  }));
-  const ws = XLSX.utils.json_to_sheet(exportData);
-  const wb = XLSX.utils.book_new();
-  XLSX.utils.book_append_sheet(wb, ws, "Users");
-  let filename = "users";
-  if (exportType === "accredited") filename = "accredited-users";
-  if (exportType === "unaccredited") filename = "unaccredited-users";
-  XLSX.writeFile(wb, `${filename}.xlsx`);
-}
 
   return (
     <div className="max-w-7xl mx-auto">
@@ -201,13 +212,31 @@ export default function AdminDashboard() {
           onChange={(e) => setFilters((f) => ({ ...f, email: e.target.value }))}
           className="w-56"
         />
+        <Select
+          value={filters.branch}
+          onValueChange={(value) =>
+            setFilters((f) => ({ ...f, branch: value }))
+          }
+        >
+          <SelectTrigger className="w-56">
+            <SelectValue placeholder="All Branches" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="all">All Branches</SelectItem>
+            {BRANCHES.map((branch) => (
+              <SelectItem key={branch} value={branch}>
+                {branch}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
         <select
           value={
             filters.isAccredited === undefined
               ? "all"
               : filters.isAccredited
-              ? "1"
-              : "0"
+                ? "1"
+                : "0"
           }
           onChange={(e) =>
             setFilters((f) => ({
@@ -216,8 +245,8 @@ export default function AdminDashboard() {
                 e.target.value === "all"
                   ? undefined
                   : e.target.value === "0"
-                  ? false
-                  : true,
+                    ? false
+                    : true,
             }))
           }
           className="border rounded px-3 py-2 text-sm"
@@ -259,6 +288,8 @@ export default function AdminDashboard() {
 
       {/* Data Table */}
       <DataTable
+        totalCount={total}
+        isLoading={isPending}
         columns={getUserColumns(
           selected,
           handleSelect,
@@ -293,6 +324,12 @@ export default function AdminDashboard() {
           } else {
             toast.error((res as any)?.error || "Failed to accredit");
           }
+        }}
+        pageIndex={page - 1}
+        pageSize={pageSize}
+        onPageChange={(nextPageIndex, nextPageSize) => {
+          setPage(nextPageIndex + 1);
+          setPageSize(nextPageSize);
         }}
       />
     </div>
