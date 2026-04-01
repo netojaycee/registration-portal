@@ -56,7 +56,7 @@ export function DataTable({
           {isLoading ? (
             Array.from({ length: pageSize }).map((_, idx) => (
               <TableRow key={`skeleton-${idx}`}>
-                {columns.map((_, ci) => (
+                {columns.map((_: any, ci: any) => (
                   <TableCell key={`skeleton-cell-${idx}-${ci}`}>
                     <div className="h-4 rounded bg-zinc-200 dark:bg-zinc-700 animate-pulse" />
                   </TableCell>
