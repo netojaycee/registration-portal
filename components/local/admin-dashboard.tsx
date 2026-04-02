@@ -20,6 +20,7 @@ import {
   fetchUsersAction,
   bulkAccreditUsersAction,
   accreditUserAction,
+  fetchAllUsersForExportAction,
 } from "@/lib/actions/accreditation.action";
 import { toast } from "sonner";
 
@@ -104,49 +105,73 @@ export default function AdminDashboard() {
   }
 
   const [exportType, setExportType] = useState<
-    "all" | "accredited" | "unaccredited"
+    "all" | "accredited" | "unaccredited" | "dateRange"
   >("all");
+  const [dateFrom, setDateFrom] = useState("");
+  const [dateTo, setDateTo] = useState("");
+  const [isExporting, setIsExporting] = useState(false);
 
-  function handleExportExcel() {
-    let exportUsers = users;
-    if (exportType === "accredited") {
-      exportUsers = users.filter((u: any) => u.isAccredited);
-    } else if (exportType === "unaccredited") {
-      exportUsers = users.filter((u: any) => !u.isAccredited);
-    }
-    if (!exportUsers.length) {
-      toast.info("No users to export for this selection.");
+  async function handleExportExcel() {
+    if (exportType === "dateRange" && (!dateFrom || !dateTo)) {
+      toast.info("Please select both a start and end date.");
       return;
     }
-    const exportData = exportUsers.map((u: any) => ({
-      firstName: u.firstName || "",
-      lastName: u.lastName || "",
-      email: u.email || "",
-      username: u.username || "",
-      phoneNumber: u.phoneNumber || "",
-      gender: u.gender || "",
-      maritalStatus: u.maritalStatus || "",
-      membershipStatus: u.membershipStatus || "",
-      modeOfAttendance: u.modeOfAttendance || "",
-      area: u.area || "",
-      branch: u.branch || "",
-      cluster: u.cluster || "",
-      accommodation: u.accommodation || "",
-      educationCareer: u.educationCareer || "",
-      classLevel: u.classLevel || "",
-      classDivision: u.classDivision || "",
-      faculty: u.faculty || "",
-      job: u.job || "",
-      address: u.address || "",
-      Accredited: u.isAccredited ? "Yes" : "No",
-    }));
-    const ws = XLSX.utils.json_to_sheet(exportData);
-    const wb = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wb, ws, "Users");
-    let filename = "users";
-    if (exportType === "accredited") filename = "accredited-users";
-    if (exportType === "unaccredited") filename = "unaccredited-users";
-    XLSX.writeFile(wb, `${filename}.xlsx`);
+
+    setIsExporting(true);
+    try {
+      const input: any = {};
+      if (exportType === "accredited") input.isAccredited = true;
+      if (exportType === "unaccredited") input.isAccredited = false;
+      if (exportType === "dateRange") {
+        input.dateFrom = dateFrom;
+        input.dateTo = dateTo;
+      }
+
+      const res = await fetchAllUsersForExportAction(input);
+      if (!res || !(res as any).success) {
+        toast.error((res as any)?.error || "Failed to fetch data for export");
+        return;
+      }
+
+      const exportUsers: any[] = (res as any).users;
+      if (!exportUsers.length) {
+        toast.info("No users to export for this selection.");
+        return;
+      }
+
+      const exportData = exportUsers.map((u: any) => ({
+        firstName: u.firstName || "",
+        lastName: u.lastName || "",
+        email: u.email || "",
+        username: u.username || "",
+        phoneNumber: u.phoneNumber || "",
+        gender: u.gender || "",
+        maritalStatus: u.maritalStatus || "",
+        membershipStatus: u.membershipStatus || "",
+        modeOfAttendance: u.modeOfAttendance || "",
+        area: u.area || "",
+        branch: u.branch || "",
+        cluster: u.cluster || "",
+        accommodation: u.accommodation || "",
+        educationCareer: u.educationCareer || "",
+        classLevel: u.classLevel || "",
+        classDivision: u.classDivision || "",
+        faculty: u.faculty || "",
+        job: u.job || "",
+        address: u.address || "",
+        Accredited: u.isAccredited ? "Yes" : "No",
+      }));
+      const ws = XLSX.utils.json_to_sheet(exportData);
+      const wb = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(wb, ws, "Users");
+      let filename = "users";
+      if (exportType === "accredited") filename = "accredited-users";
+      if (exportType === "unaccredited") filename = "unaccredited-users";
+      if (exportType === "dateRange") filename = `users-${dateFrom}-to-${dateTo}`;
+      XLSX.writeFile(wb, `${filename}.xlsx`);
+    } finally {
+      setIsExporting(false);
+    }
   }
 
   return (
@@ -270,7 +295,7 @@ export default function AdminDashboard() {
             </Button>
           </>
         )}
-        <div className="flex items-center gap-2 ml-auto">
+        <div className="flex flex-wrap items-center gap-2 ml-auto">
           <select
             value={exportType}
             onChange={(e) => setExportType(e.target.value as any)}
@@ -279,9 +304,27 @@ export default function AdminDashboard() {
             <option value="all">All Users</option>
             <option value="accredited">Only Accredited</option>
             <option value="unaccredited">Only Unaccredited</option>
+            <option value="dateRange">By Date Range</option>
           </select>
-          <Button onClick={handleExportExcel} size="sm" variant="outline">
-            Export to Excel
+          {exportType === "dateRange" && (
+            <>
+              <input
+                type="date"
+                value={dateFrom}
+                onChange={(e) => setDateFrom(e.target.value)}
+                className="border rounded px-2 py-1 text-sm"
+              />
+              <span className="text-sm text-muted-foreground">to</span>
+              <input
+                type="date"
+                value={dateTo}
+                onChange={(e) => setDateTo(e.target.value)}
+                className="border rounded px-2 py-1 text-sm"
+              />
+            </>
+          )}
+          <Button onClick={handleExportExcel} size="sm" variant="outline" disabled={isExporting}>
+            {isExporting ? "Exporting..." : "Export to Excel"}
           </Button>
         </div>
       </div>

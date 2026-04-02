@@ -12,6 +12,12 @@ export const fetchUsersSchema = z.object({
   pageSize: z.number().int().min(1).max(100).optional(),
 });
 
+export const fetchAllUsersForExportSchema = z.object({
+  isAccredited: z.boolean().optional(),
+  dateFrom: z.string().optional(),
+  dateTo: z.string().optional(),
+});
+
 
 
 export const registrationSchema = z.object({

@@ -1,7 +1,7 @@
 
 "use server";
-import { accreditUser, bulkAccreditUsers, fetchUsers } from "@/lib/services/accreditation.service";
-import { accreditUserSchema, bulkAccreditSchema, fetchUsersSchema } from "@/lib/schemas/accreditation-schemas";
+import { accreditUser, bulkAccreditUsers, fetchUsers, fetchAllUsersForExport } from "@/lib/services/accreditation.service";
+import { accreditUserSchema, bulkAccreditSchema, fetchUsersSchema, fetchAllUsersForExportSchema } from "@/lib/schemas/accreditation-schemas";
 import z from "zod";
 
 export async function accreditUserAction(input: z.infer<typeof accreditUserSchema>) {
@@ -29,6 +29,17 @@ export async function bulkAccreditUsersAction(input: z.infer<typeof bulkAccredit
     return { success: true, already: res.already, updatedCount: res.updatedCount };
   } catch (error) {
     return { error: "Failed to bulk accredit" };
+  }
+}
+
+export async function fetchAllUsersForExportAction(input: z.infer<typeof fetchAllUsersForExportSchema>) {
+  const result = fetchAllUsersForExportSchema.safeParse(input);
+  if (!result.success) return { error: result.error.flatten() };
+  try {
+    const data = await fetchAllUsersForExport(result.data);
+    return { success: true, ...data };
+  } catch (error) {
+    return { error: "Failed to fetch users for export" };
   }
 }
 

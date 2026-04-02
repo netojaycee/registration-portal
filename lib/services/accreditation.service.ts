@@ -43,6 +43,38 @@ export interface UserFilters {
   pageSize?: number;
 }
 
+export async function fetchAllUsersForExport({
+  isAccredited,
+  dateFrom,
+  dateTo,
+}: {
+  isAccredited?: boolean;
+  dateFrom?: string;
+  dateTo?: string;
+}) {
+  requireAuth();
+  const where: any = {};
+  if (typeof isAccredited === "boolean") where.isAccredited = isAccredited;
+  if (dateFrom || dateTo) {
+    where.createdAt = {};
+    if (dateFrom) {
+      const from = new Date(dateFrom);
+      from.setHours(0, 0, 0, 0);
+      where.createdAt.gte = from;
+    }
+    if (dateTo) {
+      const to = new Date(dateTo);
+      to.setHours(23, 59, 59, 999);
+      where.createdAt.lte = to;
+    }
+  }
+  const users = await prisma.registration.findMany({
+    where,
+    orderBy: { createdAt: "desc" },
+  });
+  return { users };
+}
+
 export async function fetchUsers({ firstName, lastName, email, branch, isAccredited, page = 1, pageSize = 10 }: UserFilters) {
   requireAuth();
   const where: any = {};
